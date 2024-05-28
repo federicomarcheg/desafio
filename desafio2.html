@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+        <title>chat</title>
+
+    </head>
+    <body>
+        <h1>chat</h1>
+        <div id="chat-container">
+
+        </div>
+        <form id="chat-form">
+            <input type="text" id="user"
+            placeholder="your Email" required>
+            <input type="text" id="message"
+            placeholder="your message" required>
+            <button type="submit">send</button>
+        </form>
+
+        <script>
+            const form =
+            document.getElementByid('chat-form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const user = 
+                document.getElementByid('user').value;
+                const message =
+                document.getElementByid('message').value;
+
+                await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({user, message})
+                });
+                form.reset();
+
+            });
+        </script>
+    </body>
+</html>
